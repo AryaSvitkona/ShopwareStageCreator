@@ -55,6 +55,11 @@ fi
 
 ### read
 On Unix-like operating systems, read is a builtin command of the Bash shell. It reads a line of text from standard input and splits it into words. These words can then be used as the input for other commands.
+```console
+echo "Enter Username of Stage Database: "
+read db_usr_name
+echo "Username is ${db_usr_name}
+```
 
 ### create selections
 To create a selectable "menu" we have to _echo_ first a command so the user knows that he is in charge. After that we provide all possible options, separated by a space as string.
