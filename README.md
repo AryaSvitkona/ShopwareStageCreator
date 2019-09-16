@@ -16,8 +16,8 @@ Creates shop copy of a working Shopware 5.X instance into stage folder (due to l
 
 
 ## Usage
-1. clone repository folder into root project directory of your shop (where you can find the shopware.php file, ex. "/var/www/user/shop/ShopwareStageCreator")
-2. run script with _bash ssc.sh_
+1. `git clone https://github.com/AryaSvitkona/ShopwareStageCreator.git` into root project directory of your shop (where you can find the shopware.php file, ex. "/var/www/user/shop/ShopwareStageCreator")
+2. run script with `bash ssc.sh`
 ---
 
 ## Commands
