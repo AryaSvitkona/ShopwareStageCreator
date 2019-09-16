@@ -1,4 +1,5 @@
-# Easy way to create a working Shopware 5.X instance into a subfolder
+# Shopware Stage Creator
+The easy way to create a working Shopware 5.X instance into a subfolder
 
 ## Description
 Creates shop copy of a working Shopware 5.X instance into stage folder (due to licence problems on subdomains). In steps the script will do following tasks:
