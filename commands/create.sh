@@ -62,6 +62,6 @@ function createStage()
 
   afterCleanup
 
-  echo ${lightGreen}Stage created successfully, feel free to have a look at the logfile" ${reset}
+  echo "${lightGreen}Stage created successfully, feel free to have a look at the logfile ${reset}"
 
 }
