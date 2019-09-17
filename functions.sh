@@ -22,8 +22,7 @@ function banner() {
 function findMySQLPath() {
     mysqlPath=$(which mysql)
     if [[ -z "${mysqlPath}" ]]; then
-        echo ${mysqlPath}
-        exit 1
+        echo "MySQL path ${mysqlPath}" >> ${logFile}
     else
         echo "MySQL couldn't found"
         exit 1
