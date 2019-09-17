@@ -16,7 +16,7 @@
 
 #set working directory as variable
 scriptPath="$( cd "$(dirname "$0")" ; pwd -P )"
-shopDir=$scriptPath/shopware
+shopDir=$scriptPath/..
 
 if [[ ! -f "${shopDir}/shopware.php" ]]; then
     echo "Package not placed inside Shopware project, shopware.php missing."
