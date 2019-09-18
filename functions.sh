@@ -128,7 +128,7 @@ function importLiveDbDumpToStage() {
 
   echo exit | ${mysqlPath} -h $1 -u $2 -p$3 $4 -P$5 2>/dev/null
   echo "Start with database import to stage" >> ${logFile}
-  ${mysqlPath} -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage} < "${shopDir}/mysqltemp/dump.sql"
+  ${mysqlPath} -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage} < "${shopDir}/mysqlTemp/dump.sql"
 
 
   if [ $? -eq 0 ]; then
@@ -180,7 +180,7 @@ function slackNotification() {
 
 function afterCleanup() {
   clearCache
-  rm -rf "${shopDir}/mysqltemp/dump.sql"
+  rm -rf "${shopDir}/mysqlTemp/dump.sql"
 }
 
 function printError(){
