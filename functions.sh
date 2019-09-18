@@ -128,7 +128,7 @@ function importLiveDbDumpToStage() {
 
   echo exit | ${mysqlPath} -h $1 -u $2 -p$3 $4 -P$5 2>/dev/null
   echo "Start with database import to stage" >> ${logFile}
-  ${mysqlPath} -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage} < "${shopDir}/mysqlTemp/dump.sql"
+  ${mysqlPath} -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} ${Db_Database_Stage} -P ${Db_Port_Stage} < "${shopDir}/mysqlTemp/dump.sql"
 
 
   if [ $? -eq 0 ]; then
@@ -153,14 +153,14 @@ function clearCache() {
 function runMigrations() {
   timestamp >> $logFile
   echo "Run stage migrations" >> $logFile
-  ${mysqlPath} -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage} < "${scriptPath}/files/stage-migrations.sql"
+  ${mysqlPath} -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} ${Db_Database_Stage} -P ${Db_Port_Stage} < "${scriptPath}/files/stage-migrations.sql"
 }
 
 # provides a quick check up, which http status the stage environnement returns
 function afterCheck() {
   #get shop URL
-  shopUrl=$(echo "SELECT host FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage})
-  basePath=$(echo "SELECT base_path FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage})
+  shopUrl=$(echo "SELECT host FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} ${Db_Database_Stage} -P ${Db_Port_Stage})
+  basePath=$(echo "SELECT base_path FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} ${Db_Database_Stage} -P ${Db_Port_Stage})
 
   #get http status of stage
   httpstatus = curl -Is ${shopUrl}/${basePath} | head -1 | awk '{print $2}'
@@ -169,8 +169,8 @@ function afterCheck() {
 
 # creates Slack notification into choosen channel (optional)
 function slackNotification() {
-  shopUrl=$(echo "SELECT host FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage})
-  basePath=$(echo "SELECT base_path FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Database_Stage} -p${Db_Password_Stage} ${Db_Database_Live} -P ${Db_Port_Stage})
+  shopUrl=$(echo "SELECT host FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} ${Db_Database_Stage} -P ${Db_Port_Stage})
+  basePath=$(echo "SELECT base_path FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} ${Db_Database_Stage} -P ${Db_Port_Stage})
 
   #send slack notification into #infrastructure channel
   curl -X POST -H 'Content-type: application/json' --data '{"text":"Stage environnement created or updated for http://'"${shopUrl}"''"${basePath}"' with user '"${USER}"'"}' ${slackWebHook}
