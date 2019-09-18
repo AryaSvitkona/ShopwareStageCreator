@@ -142,7 +142,7 @@ function importLiveDbDumpToStage() {
 # cleares cache
 function clearCache() {
   timestamp >> $logFile
-  if [[ ! $(stat -c "%a" "${shopDir}/stage/bin/console") == "755" ]]; then
+  if [[ ! $(stat -f "%OLp" "${shopDir}/stage/bin/console") == "755" ]]; then
     chmod 775 "${shopDir}/stage/bin/console"
   fi
 
