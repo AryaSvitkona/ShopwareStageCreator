@@ -163,7 +163,7 @@ function afterCheck() {
   basePath=$(echo "SELECT base_path FROM s_core_shops WHERE id=1" | ${mysqlPath} -s -N -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} ${Db_Database_Stage} -P ${Db_Port_Stage})
 
   #get http status of stage
-  httpstatus=curl -Is ${shopUrl}/${basePath} | head -1 | awk '{print $2}'
+  httpstatus=$(curl -Is ${shopUrl}/${basePath} | head -1 | awk '{print $2}')
   echo "HTTP Status: ${httpstatus}" >> $logFile
 }
 
