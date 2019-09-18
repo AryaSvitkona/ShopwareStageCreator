@@ -51,7 +51,7 @@ do
             context='delete'
             echo ${red}Choosen \"Delete existing stage\" ${reset}
             source ${scriptPath}/commands/${context}.sh
-            deleteStage
+            promptDeleteStage
             break
             ;;
         "Exit")

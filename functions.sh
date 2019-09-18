@@ -215,3 +215,9 @@ function promptYesOrNo() {
         esac
     done
 }
+
+function deleteStage() {
+    mkdir "${shopDir}/empty"
+    rsync -av --delete "${shopDir}empty/" "${shopDir}/stage/"
+    rm -rf "${shopDir}/stage/"
+}
