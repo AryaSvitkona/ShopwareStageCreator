@@ -132,9 +132,9 @@ function importLiveDbDumpToStage() {
 
 
   if [ $? -eq 0 ]; then
-    echo "Database dumped successfully"
+    echo "Database imported successfully" >> ${logFile}
   else
-    echo "Error while dump database"
+    echo "Error while import database to stage" >> ${logFile}
     exit 1
   fi
 }
