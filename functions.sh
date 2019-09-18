@@ -69,11 +69,11 @@ function createDevConfig() {
   cp ${scriptPath}/files/config_dev.php ${shopDir}/stage/config_dev.php
 
   if [[ -f "${shopDir}/stage/config_dev.php" ]]; then
-    sed -i 's/'__HOSTNAME__'/'${Db_Host_Stage}'/g' ${shopDir}/stage/config_dev.php
-  	sed -i 's/'__DBNAME__'/'${Db_Database_Stage}'/g' ${shopDir}/stage/config_dev.php
-    sed -i 's/'__DBUSERNAME__'/'${Db_Username_Stage}'/g' ${shopDir}/stage/config_dev.php
-  	sed -i 's/'__DBPASSWORD__'/'${Db_Password_Stage}'/g' ${shopDir}/stage/config_dev.php
-    sed -i 's/'__PORT__'/'${Db_Port_Stage}'/g' ${shopDir}/stage/config_dev.php
+    sed 's/'__HOSTNAME__'/'${Db_Host_Stage}'/g' ${shopDir}/stage/config_dev.php
+  	sed 's/'__DBNAME__'/'${Db_Database_Stage}'/g' ${shopDir}/stage/config_dev.php
+    sed 's/'__DBUSERNAME__'/'${Db_Username_Stage}'/g' ${shopDir}/stage/config_dev.php
+  	sed 's/'__DBPASSWORD__'/'${Db_Password_Stage}'/g' ${shopDir}/stage/config_dev.php
+    sed 's/'__PORT__'/'${Db_Port_Stage}'/g' ${shopDir}/stage/config_dev.php
 
   	echo "config_dev.php updated" >> ${logFile}
     echo ${lightGreen}config_dev.php updated${reset}
