@@ -10,6 +10,11 @@ red="${esc}[31m"
 bold="${esc}[1m"
 warn="${esc}[41m${esc}[97m"
 
+# creates a log entry
+function createLogEntry() {
+    #note starttime
+    timestamp >> ${logFile}
+}
 
 # set colors and output banner
 function banner() {
@@ -31,7 +36,20 @@ function findMySQLPath() {
 
 # returns a human readable timestamp dd-mm-yyyy
 function timestamp() {
-  date +"%T"
+    date +"%T"
+}
+
+# checks installation if config.php file and no .env file exists
+# if false, it will stop the processing
+function configCheck() {
+    if [[ -f "${shopDir}/config.php" ]]; then
+        echo "${shopDir}/config.php exists" >> ${logFile}
+        if [[ -f "${shopDir}/.env" ]]; then
+            echo "${shopDir}/.env exists - exit here" >> ${logFile}
+            tail ${logFile}
+            exit 1
+        fi
+    fi
 }
 
 # filesync via rsync between live and stage folders

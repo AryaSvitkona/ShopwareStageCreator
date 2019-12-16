@@ -18,6 +18,8 @@ function createStage()
   #note set log entry with connected username
   echo "You're connected as ==> " $USER >> ${logFile}
 
+  configCheck
+
   shopSync
 
   #collect data from live database configuration
