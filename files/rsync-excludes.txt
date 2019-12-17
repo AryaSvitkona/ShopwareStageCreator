@@ -1,0 +1,5 @@
+.git/
+mysqlTemp/
+log.txt
+stage/
+ShopwareStageCreator/
