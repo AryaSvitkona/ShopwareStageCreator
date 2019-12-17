@@ -20,8 +20,6 @@ function createStage()
 
   configCheck
 
-  shopSync
-
   #collect data from live database configuration
   Db_Host_Live=`grep host $shopDir/config.php | awk -F"'" '{print $4}'`
   Db_Database_Live=`grep dbname $shopDir/config.php | awk -F"'" '{print $4}'`
@@ -45,6 +43,8 @@ function createStage()
 
   read -p "Enter your stage database PORT number (default: 3306): " Db_Port_Stage
   Db_Port_Stage=${Db_Port_Stage:-"3306"}
+
+  shopSync
 
   createDevConfig
 
