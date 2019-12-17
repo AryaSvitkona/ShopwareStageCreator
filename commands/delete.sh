@@ -9,7 +9,7 @@ function promptDeleteStage(){
   else
       deleteStage
       if [ $? -eq 0 ]; then
-          echo -e "\n${lightGreen}Your instance was deleted, have a coffee!${reset}\n"
+          echo -e "\n${lightGreen}Your instance was deleted. Please drop database on your own and have a coffee after!${reset}\n"
           exit 0
       else
         echo "Error while delete stage" >> ${logFile}
