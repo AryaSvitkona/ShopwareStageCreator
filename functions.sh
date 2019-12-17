@@ -235,7 +235,10 @@ function promptYesOrNo() {
 }
 
 function deleteStage() {
+    if [[  -d "${shopDir}/empty" ]]; then
+        rm -rf "${shopDir}/empty"
+    fi
     mkdir "${shopDir}/empty"
-    rsync -av --delete "${shopDir}empty/" "${shopDir}/stage/"
+    rsync -av --delete "${shopDir}/empty/" "${shopDir}/stage/"
     rm -rf "${shopDir}/stage/"
 }
