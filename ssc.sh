@@ -42,7 +42,7 @@ do
             createStage
             break
             ;;
-        "Update existing stage (including Database)")
+        "Update existing stage")
             context='update'
             echo ${blue}Choosen \"Update existing stage\" ${reset}
             break
