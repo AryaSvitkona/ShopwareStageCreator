@@ -1,5 +1,4 @@
 <?php
-$defaultConfig = require 'config.php';
 
 return [
     'db' => array (
@@ -24,11 +23,7 @@ return [
     ],
 
     'csrfProtection' => [
-        'frontend' => true,
-        'backend' => true
-    ],
-
-    'httpcache' => [
-        'debug' => true
+        'frontend' => false,
+        'backend' => false
     ],
 ];
