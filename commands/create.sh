@@ -44,6 +44,8 @@ function createStage()
   read -p "Enter your stage database PORT number (default: 3306): " Db_Port_Stage
   Db_Port_Stage=${Db_Port_Stage:-"3306"}
 
+  compareMySQLCredentials
+
   checkMySQLCredentials ${Db_Host_Live} ${Db_User_Live} ${Db_Password_Live} ${Db_Database_Live} ${Db_Port_Live}
 
   checkMySQLCredentials ${Db_Host_Stage} ${Db_Username_Stage} ${Db_Password_Stage} ${Db_Database_Stage} ${Db_Port_Stage}

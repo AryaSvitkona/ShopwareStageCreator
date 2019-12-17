@@ -77,6 +77,15 @@ function checkMySQLCredentials() {
     fi
 }
 
+# check if live database and stage database are not equal
+function compareMySQLCredentials () {
+    if [ "${Db_Database_Live}" == "${Db_Database_Stage}" ]; then
+        echo ${red}Your stage databasename is equal to your live database. Abort command.${reset}
+        echo "WARNING: Stage databasename and Live databasename are equal!" >> ${logFile}
+        exit 1
+    fi
+}
+
 # copies dev config file into stage folder and replaces default values
 # trough mysql credentials
 function createDevConfig() {
