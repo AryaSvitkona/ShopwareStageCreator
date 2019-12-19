@@ -41,7 +41,7 @@ function createStage()
   Db_Password_Stage=${Db_Password_Stage:-foo}
   Db_Password_Stage=${Db_Password_Stage//\"/\\\"} # Escapes apostrophes
 
-  read -p "Enter your stage database PORT number (default: 3306): " Db_Port_Stage
+  read -p "Enter your stage database PORT number (default: ${Db_Port_Live}): " Db_Port_Stage
   Db_Port_Stage=${Db_Port_Stage:-"3306"}
 
   compareMySQLCredentials
