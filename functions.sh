@@ -56,6 +56,8 @@ function shopSync() {
         echo "Stage folder created" >> ${logFile}
     fi
 
+
+
     timestamp >> ${logFile}
     echo "Datasync processing" >> ${logFile}
     rsync -av --progress --exclude-from "${scriptPath}/files/rsync-excludes.txt" $shopDir/ ${stageFolder}
@@ -190,6 +192,10 @@ function afterCheck() {
     #get http status of stage
     httpstatus=$(curl -Is ${shopUrl}/${basePath} | head -1 | awk '{print $2}')
     echo "HTTP Status: ${httpstatus}" >> $logFile
+
+    if [[ ! $(stat -c '%a' "${shopDir}/stage/") == "755" ]]; then
+        chmod 755 "${shopDir}/stage/"
+    fi
 }
 
 # creates Slack notification into choosen channel (optional)
