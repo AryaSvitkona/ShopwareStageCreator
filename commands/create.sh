@@ -21,11 +21,11 @@ function createStage()
   configCheck
 
   #collect data from live database configuration
-  Db_Host_Live=`grep host $shopDir/config.php | awk -F"'" '{print $4}'`
-  Db_Database_Live=`grep dbname $shopDir/config.php | awk -F"'" '{print $4}'`
-  Db_User_Live=`grep username $shopDir/config.php | awk -F"'" '{print $4}'`
-  Db_Password_Live=`grep password $shopDir/config.php | awk -F"'" '{print $4}'`
-  Db_Port_Live=`grep port $shopDir/config.php | awk -F"'" '{print $4}'`
+  Db_Host_Live=`grep "'host'" $shopDir/config.php | awk -F"'" '{print $4}'`
+  Db_Database_Live=`grep "'dbname'" $shopDir/config.php | awk -F"'" '{print $4}'`
+  Db_User_Live=`grep "'username'" $shopDir/config.php | awk -F"'" '{print $4}'`
+  Db_Password_Live=`grep "'password'" $shopDir/config.php | awk -F"'" '{print $4}'`
+  Db_Port_Live=`grep "'port'" $shopDir/config.php | awk -F"'" '{print $4}'`
 
   #collect data for stage database environnement
   read -p "Enter your stage database HOST (default: ${Db_Host_Live}): " Db_Host_Stage
