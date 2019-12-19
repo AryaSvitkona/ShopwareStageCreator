@@ -92,11 +92,11 @@ function createDevConfig() {
     cp -f ${scriptPath}/files/config_dev.php ${shopDir}/stage/config.php
 
     if [[ -f "${shopDir}/stage/config.php" ]]; then
-        sed -i 's/'__HOSTNAME__'/'${Db_Host_Stage}'/g' ${shopDir}/stage/config.php
-    	sed -i 's/'__DBNAME__'/'${Db_Database_Stage}'/g' ${shopDir}/stage/config.php
-        sed -i 's/'__DBUSERNAME__'/'${Db_Username_Stage}'/g' ${shopDir}/stage/config.php
-    	sed -i 's/'__DBPASSWORD__'/'${Db_Password_Stage}'/g' ${shopDir}/stage/config.php
-        sed -i 's/'__PORT__'/'${Db_Port_Stage}'/g' ${shopDir}/stage/config.php
+        sed -i "s/'__HOSTNAME__'/'${Db_Host_Stage}'/g" ${shopDir}/stage/config.php
+    	sed -i "s/'__DBNAME__'/'${Db_Database_Stage}'/g" ${shopDir}/stage/config.php
+        sed -i "s/'__DBUSERNAME__'/'${Db_Username_Stage}'/g" ${shopDir}/stage/config.php
+    	sed -i "s/'__DBPASSWORD__'/'${Db_Password_Stage//&/\\&}'/g" ${shopDir}/stage/config.php
+        sed -i "s/'__PORT__'/'${Db_Port_Stage}'/g" ${shopDir}/stage/config.php
 
     	echo "config.php updated" >> ${logFile}
         echo ${lightGreen}config.php updated${reset}
@@ -125,7 +125,6 @@ function createLiveDbDump() {
     mkdir -p ${mysqlTemp}
     echo "MySQLTemp folder created" >> ${logFile}
 
-    echo exit | ${mysqlPath} -h $1 -u $2 -p$3 $4 -P$5 2>/dev/null
     echo "Start with DB export" >> ${logFile}
     mysqldump -h ${Db_Host_Live} -u ${Db_User_Live} -p${Db_Password_Live} ${Db_Database_Live} -P ${Db_Port_Live} > ${shopDir}/mysqlTemp/dump.sql
 
@@ -149,7 +148,6 @@ function importLiveDbDumpToStage() {
     mkdir -p ${mysqlTemp}
     echo "MySQLTemp folder created" >> ${logFile}
 
-    echo exit | ${mysqlPath} -h $1 -u $2 -p$3 $4 -P$5 2>/dev/null
     echo "Start with database import to stage" >> ${logFile}
     ${mysqlPath} -h ${Db_Host_Stage} -u ${Db_Username_Stage} -p${Db_Password_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} < "${shopDir}/mysqlTemp/dump.sql"
 
