@@ -2,13 +2,13 @@
 The easy way to create a working Shopware 5.X instance into a subfolder
 
 ## Description
-Creates shop copy of a working Shopware 5.X instance into stage folder (due to licence problems on subdomains). In steps the script will do following tasks:
-- creates folder named "stage"
-- rsync of files and folders including permissions into "stage" folder
-- creates temporary folder for mysqldump
-- dumps live database
-- import live database into stage Database
-- run mysql migrations commands for stage environment (set maintenance mode, update host path, update metarobots snippets)
+Creates shop copy of a working Shopware 5.X instance into subfolder called "stage" (due to licence problems on subdomains). In steps the script will do following tasks:
+- creates subfolder named "stage"
+- rsync of files and folders including permissions into "stage" subfolder
+- creates temporary folder for MySQLdump
+- dump live database
+- import dump from live database into stage database
+- run MySQL migration commands for stage environment (set maintenance mode, update host path, update metarobots snippets)
 - writes new config.php for stage environment
 - clear cache
 - send Slack notification into chosen channel (optional)
@@ -21,7 +21,7 @@ Creates shop copy of a working Shopware 5.X instance into stage folder (due to l
 3. run script with `bash ssc.sh`
 ---
 
-## Commands
+## Used commands
 ### pwd
 Will provide you the full path to the directory in which the command was called.
 
@@ -163,7 +163,7 @@ https://wiki.ubuntuusers.de/rm/
 ### printf
 Textoutput in an advanced way by passing arguments.
 ```console
-printf "Ich schreibe einen Text mit \e[31m rot \e[0m oder mit \e[32m grün \e[0m \n"
+printf "I write somte text in \e[31m red \e[0m or in \e[32m green \e[0m \n"
 ```
 http://www.andrewnoske.com/wiki/Bash_-_adding_color
 https://www.shellhacks.com/bash-colors/

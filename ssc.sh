@@ -12,7 +12,7 @@
 # Version 1.0
 # Author: Stefano Rutishauser
 # Description: Creates shop copy of a working Shopware 5.X
-# instance into stage subfolder.
+# instance into subfolder named "stage".
 
 #set working directory as variable
 scriptPath="$( cd "$(dirname "$0")" ; pwd -P )"
