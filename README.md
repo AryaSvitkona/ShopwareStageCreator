@@ -8,10 +8,10 @@ Creates shop copy of a working Shopware 5.X instance into stage folder (due to l
 - creates temporary folder for mysqldump
 - dumps live database
 - import live database into stage Database
-- run mysql migrations commands for stage environnement (set maintance mode, update host path, update metarobots snippeds)
-- writes new config.php for stage environnement
+- run mysql migrations commands for stage environment (set maintenance mode, update host path, update metarobots snippets)
+- writes new config.php for stage environment
 - clear cache
-- send Slack notification into choosen channel (optional)
+- send Slack notification into chosen channel (optional)
 
 
 
