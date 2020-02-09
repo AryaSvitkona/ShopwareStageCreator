@@ -19,6 +19,11 @@ Creates shop copy of a working Shopware 5.X instance into subfolder called "stag
 1. `git clone https://github.com/AryaSvitkona/ShopwareStageCreator.git` into root project directory of your shop (where you can find the shopware.php file, ex. "/var/www/user/shop/ShopwareStageCreator")
 2. change into folder with `cd ShopwareStageCreator`
 3. run script with `bash ssc.sh`
+
+### Exclude files and folders (optional)
+You will find inside "ShopwareStageCreator/files" a file called "rsync-excludes.txt". You're able to add specific files or folders, which not should be synced inside the "stage" subfolder.
+DON'T remove the "stage/" line, otherwise it will sync the stage folder inside itself until infinity and beyond.
+
 ---
 
 ## Used commands
