@@ -21,8 +21,8 @@ Creates shop copy of a working Shopware 5.X instance into subfolder called "stag
 3. run script with `bash ssc.sh`
 
 ### Exclude files and folders (optional)
-You will find inside "ShopwareStageCreator/files" a file called "rsync-excludes.txt". You're able to add specific files or folders, which not should be synced inside the "stage" subfolder.
-DON'T remove the "stage/" line, otherwise it will sync the stage folder inside itself until infinity and beyond.
+You will find inside `ShopwareStageCreator/files` a file called `rsync-excludes.txt`. You're able to add specific files or folders, which not should be synced inside the "stage" subfolder.
+DON'T remove the `stage/` line, otherwise it will sync the stage folder inside itself until infinity and beyond.
 
 ---
 
