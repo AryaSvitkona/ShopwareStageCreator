@@ -255,3 +255,40 @@ function deleteStage() {
     rsync -av --delete "${shopDir}/empty/" "${shopDir}/stage/"
     rm -rf "${shopDir}/stage/"
 }
+
+function collectStageCredentials() {
+    if [[ ! -f "${shopDir}/stage/config.php" ]]; then
+        echo "File doesn't exist"
+        exit
+    fi
+
+    Db_Host_Stage=`grep "'host'" $shopDir/stage/config.php | awk -F"'" '{print $4}'`
+    Db_Database_Stage=`grep "'dbname'" $shopDir/stage/config.php | awk -F"'" '{print $4}'`
+    Db_Username_Stage=`grep "'username'" $shopDir/stage/config.php | awk -F"'" '{print $4}'`
+    Db_Password_Stage=`grep "'password'" $shopDir/stage/config.php | awk -F"'" '{print $4}'`
+    Db_Port_Stage=`grep "'port'" $shopDir/stage/config.php | awk -F"'" '{print $4}'`
+}
+
+function eraseStageDatabase() {
+    checkMySQLCredentials ${Db_Host_Stage} ${Db_Username_Stage} ${Db_Password_Stage} ${Db_Database_Stage} ${Db_Port_Stage}
+
+    # get all tables
+    TABLES=$($mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' )
+
+    # make sure tables exits
+    if [ "$TABLES" == "" ]
+    then
+        echo "No tables found in ${Db_Database_Stage}!" >> ${logFile}
+        exit
+    fi
+
+    # erase found tables
+    for t in $TABLES
+    do
+        echo "Deleting $t table from $MDB database..."
+        $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e  "SET FOREIGN_KEY_CHECKS=0; DROP TABLE $t"
+    done
+
+    # enable foreign key check
+    $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e 'SET FOREIGN_KEY_CHECKS=1;'
+}
