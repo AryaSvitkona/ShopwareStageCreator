@@ -23,7 +23,7 @@ function createStage()
   #collect data from live database configuration
   Db_Host_Live=`grep "'host'" $shopDir/config.php | awk -F"'" '{print $4}'`
   Db_Database_Live=`grep "'dbname'" $shopDir/config.php | awk -F"'" '{print $4}'`
-  Db_User_Live=`grep "'username'" $shopDir/config.php | awk -F"'" '{print $4}'`
+  Db_Username_Live=`grep "'username'" $shopDir/config.php | awk -F"'" '{print $4}'`
   Db_Password_Live=`grep "'password'" $shopDir/config.php | awk -F"'" '{print $4}'`
   Db_Port_Live=`grep "'port'" $shopDir/config.php | awk -F"'" '{print $4}'`
 
@@ -34,8 +34,8 @@ function createStage()
   read -p "Enter your stage database NAME (default: ${Db_Database_Live}): " Db_Database_Stage
   Db_Database_Stage=${Db_Database_Stage:-"${Db_Database_Live}"}
 
-  read -p "Enter your stage database USERNAME (default: ${Db_User_Live}): " Db_Username_Stage
-  Db_Username_Stage=${Db_Username_Stage:-"${Db_User_Live}"}
+  read -p "Enter your stage database USERNAME (default: ${Db_Username_Live}): " Db_Username_Stage
+  Db_Username_Stage=${Db_Username_Stage:-"${Db_Username_Live}"}
 
   read -p "Enter your stage database PASSWORD (default: foo): " Db_Password_Stage
   Db_Password_Stage=${Db_Password_Stage:-foo}
@@ -46,7 +46,7 @@ function createStage()
 
   compareMySQLCredentials
 
-  checkMySQLCredentials ${Db_Host_Live} ${Db_User_Live} ${Db_Password_Live} ${Db_Database_Live} ${Db_Port_Live}
+  checkMySQLCredentials ${Db_Host_Live} ${Db_Username_Live} ${Db_Password_Live} ${Db_Database_Live} ${Db_Port_Live}
 
   checkMySQLCredentials ${Db_Host_Stage} ${Db_Username_Stage} ${Db_Password_Stage} ${Db_Database_Stage} ${Db_Port_Stage}
 

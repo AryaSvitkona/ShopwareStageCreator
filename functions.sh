@@ -128,7 +128,7 @@ function createLiveDbDump() {
     echo "MySQLTemp folder created" >> ${logFile}
 
     echo "Start with DB export" >> ${logFile}
-    mysqldump -h ${Db_Host_Live} -u ${Db_User_Live} -p${Db_Password_Live} ${Db_Database_Live} -P ${Db_Port_Live} > ${shopDir}/mysqlTemp/dump.sql
+    mysqldump -h ${Db_Host_Live} -u ${Db_Username_Live} -p${Db_Password_Live} ${Db_Database_Live} -P ${Db_Port_Live} > ${shopDir}/mysqlTemp/dump.sql
 
 
     if [ $? -eq 0 ]; then
