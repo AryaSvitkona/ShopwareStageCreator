@@ -112,6 +112,7 @@ function createDevConfig() {
 # copies live database into stage database
 function copyLiveDbToStage() {
     createLiveDbDump
+    eraseStageDatabase
     importLiveDbDumpToStage
 }
 
@@ -276,19 +277,19 @@ function eraseStageDatabase() {
     TABLES=$($mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' )
 
     # make sure tables exits
-    if [ "$TABLES" == "" ]
+    if [ "$TABLES" != "" ]
     then
+        # erase found tables
+        for t in $TABLES
+        do
+            echo "Deleting $t table from $MDB database..."
+            $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e  "SET FOREIGN_KEY_CHECKS=0; DROP TABLE $t"
+            echo "Tables in ${Db_Database_Stage} deleted" >> ${logFile}
+        done
+
+        # enable foreign key check
+        $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e 'SET FOREIGN_KEY_CHECKS=1;'
+    else
         echo "No tables found in ${Db_Database_Stage}!" >> ${logFile}
-        exit
     fi
-
-    # erase found tables
-    for t in $TABLES
-    do
-        echo "Deleting $t table from $MDB database..."
-        $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e  "SET FOREIGN_KEY_CHECKS=0; DROP TABLE $t"
-    done
-
-    # enable foreign key check
-    $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e 'SET FOREIGN_KEY_CHECKS=1;'
 }
