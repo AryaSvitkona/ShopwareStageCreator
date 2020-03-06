@@ -284,8 +284,8 @@ function eraseStageDatabase() {
         do
             echo "Deleting $t table from $MDB database..."
             $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e  "SET FOREIGN_KEY_CHECKS=0; DROP TABLE $t"
-            echo "Tables in ${Db_Database_Stage} deleted" >> ${logFile}
         done
+        echo "Tables in ${Db_Database_Stage} deleted" >> ${logFile}
 
         # enable foreign key check
         $mysqlPath -u ${Db_Username_Stage} -p${Db_Password_Stage} -h ${Db_Host_Stage} -D ${Db_Database_Stage} -P ${Db_Port_Stage} -e 'SET FOREIGN_KEY_CHECKS=1;'
