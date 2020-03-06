@@ -3,15 +3,28 @@ The easy way to create a working Shopware 5.X instance into a subfolder
 
 ## Description
 Creates shop copy of a working Shopware 5.X instance into subfolder called "stage" (due to licence problems on subdomains). In steps the script will do following tasks:
+
+### Create
 - creates subfolder named "stage"
 - rsync of files and folders including permissions into "stage" subfolder
+- writes new config.php for stage environment
 - creates temporary folder for MySQLdump
 - dump live database
-- import dump from live database into stage database
+- check live database dump for [definer](https://dev.mysql.com/doc/refman/8.0/en/create-procedure.html)
+- replace definer user for stage environment
+- import editet dump from live database into stage database
 - run MySQL migration commands for stage environment (set maintenance mode, update host path, update metarobots snippets)
-- writes new config.php for stage environment
 - clear cache
 - send Slack notification into chosen channel (optional)
+
+### Update
+- not written yet
+
+### Delete
+- collect database credentials from stage (if exist)
+- ask for delete confirmation of stage environment
+- deletes every table in database (database will still exist)
+- removes whole "stage" subfolder
 
 
 
