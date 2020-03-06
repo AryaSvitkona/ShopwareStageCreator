@@ -259,7 +259,7 @@ function deleteStage() {
 
 function collectStageCredentials() {
     if [[ ! -f "${shopDir}/stage/config.php" ]]; then
-        echo "File doesn't exist"
+        echo "Config.php file in stage not found"
         exit
     fi
 
