@@ -112,6 +112,7 @@ function createDevConfig() {
 # copies live database into stage database
 function copyLiveDbToStage() {
     createLiveDbDump
+    checkLiveDatabase
     eraseStageDatabase
     importLiveDbDumpToStage
 }
@@ -160,6 +161,20 @@ function importLiveDbDumpToStage() {
     else
         echo "Error while import database to stage" >> ${logFile}
         exit 1
+    fi
+}
+
+# checks live database dump for triggers
+
+function checkLiveDatabase() {
+    timestamp >> $logFile
+
+    if grep -q DEFINER ${shopDir}/mysqlTemp/dump.sql; then
+        echo "DEFINER in live database found"
+        echo "DEFINER in live database found" >> $logFile
+        sed -i 's/DEFINER=`${Db_Username_Live}`/DEFINER=`${Db_Username_Stage}`/gI' ${scriptPath}/mysqlTemp/dump.sql
+    else
+        echo "no DEFINER found" >> $logFile
     fi
 }
 
