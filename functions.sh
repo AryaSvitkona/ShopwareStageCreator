@@ -172,7 +172,7 @@ function checkLiveDatabase() {
     if grep -q DEFINER ${shopDir}/mysqlTemp/dump.sql; then
         echo "DEFINER in live database found"
         echo "DEFINER in live database found" >> $logFile
-        sed -i 's/DEFINER=`${Db_Username_Live}`/DEFINER=`${Db_Username_Stage}`/gI' ${shopDir}/mysqlTemp/dump.sql
+        sed -i 's/DEFINER=`'${Db_Username_Live}'`/DEFINER=`'${Db_Username_Stage}'`/gI' ${shopDir}/mysqlTemp/dump.sql
     else
         echo "no DEFINER found" >> $logFile
     fi
