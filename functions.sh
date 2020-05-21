@@ -63,3 +63,30 @@ function testCommand() {
       logEntry "Error: $1 is not installed or inaccessible."
     fi
 }
+
+# checks shopware installation and its major version (sw5 or sw6)
+function shopwareCheck() {
+    if [ -f "${shopDir}/shopware.php" ]; then
+
+        if [ -d "${shopDir}/vendor/shopware/shopware" ]; then
+            swMajorVersion="SW5"
+        else
+            swMajorVersion="unknow"
+            logEntry "${swMajorVersion} instance found"
+            exit 1
+        fi
+
+    elif [ -d "${shopDir}/vendor/shopware/platform" ]; then
+        swMajorVersion="SW6"
+
+    else
+        swMajorVersion="unknow"
+        logEntry "${swMajorVersion} instance found"
+        exit 1
+    fi
+
+    logEntry "${swMajorVersion} instance found"
+}
+
+# checks if shopware configuration exists
+
