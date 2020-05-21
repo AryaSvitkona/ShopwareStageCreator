@@ -90,3 +90,34 @@ function shopwareCheck() {
 
 # checks if shopware configuration exists
 
+function configCheck() {
+    if [ "${swMajorVersion}" = "SW5" ];then
+
+        if [ -f "${shopDir}/config.php" ]; then
+            if [ -f "${shopDir}/.env" ]; then
+                logEntry "Config.php and .env file found"
+                exit 1
+            fi
+            shopConfigFile="${shopDir}/config.php";
+
+        elif [ -f "${shopDir}/.env.php" ]; then
+            shopConfigFile="${shopDir}/.env";
+        else
+            logEntry "No configuration file found"
+            exit 1
+        fi
+        logEntry "Configuration file located at ${shopConfigFile}"
+    fi
+
+    if [ "${swMajorVersion}" = "SW6" ];then
+        if [ -f "${shopDir}/.env" ]; then
+            shopConfigFile="${shopDir}/.env";
+            logEntry "Configuration file located at ${shopConfigFile}"
+        else
+            logEntry "No configuration file found"
+            exit 1
+        fi
+
+    fi
+
+}
