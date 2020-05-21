@@ -31,10 +31,10 @@ touch ${logFile}
 #includes all nessesary functions
 source "${scriptPath}/functions.sh"
 
+banner
+
 # test if nessesary commands are available
 initialTest
-
-banner
 
 COLUMNS=20
 echo "=================================================="
@@ -48,6 +48,7 @@ do
             context='create'
             echo ${lightGreen}Choosen \"Create new stage\" ${reset}
             source ${scriptPath}/commands/${context}.sh
+            createStage
             break
             ;;
         "Update existing stage")
