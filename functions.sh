@@ -52,6 +52,7 @@ function initialTest() {
 # checks if logfile contains errors and returns to console
     if [ -s ${logFile} ]; then
         cat ${logFile}
+        exit 1
     else
         echo "${green}"
         echo "All commands available"
