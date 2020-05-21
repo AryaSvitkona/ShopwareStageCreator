@@ -51,9 +51,7 @@ function initialTest() {
         cat ${logFile}
         exit 1
     else
-        echo "${green}"
-        echo "All commands available"
-        echo "${reset}"
+        logEntry "Tests successfully passed - all commands available"
     fi
 }
 
