@@ -18,9 +18,7 @@ warn="${esc}[41m${esc}[97m"
 
 # set colors and output banner
 function banner() {
-    echo "${blue}"
     cat "${scriptPath}/files/banner.txt"
-    echo "${reset}"
 }
 
 function logEntry() {
