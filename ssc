@@ -31,7 +31,39 @@ touch ${logFile}
 #includes all nessesary functions
 source "${scriptPath}/functions.sh"
 
+# test if nessesary commands are available
 initialTest
 
-#note starttime
-logEntry
+banner
+
+COLUMNS=20
+echo "=================================================="
+printf 'Choose an action (insert number and press enter) \n'
+echo "=================================================="
+options=("Create new stage" "Update existing stage" "Delete existing stage" "Exit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Create new stage")
+            context='create'
+            echo ${lightGreen}Choosen \"Create new stage\" ${reset}
+            source ${scriptPath}/commands/${context}.sh
+            break
+            ;;
+        "Update existing stage")
+            context='update'
+            echo ${lightGreen}Choosen \"Update existing stage\" ${reset}
+            break
+            ;;
+        "Delete existing stage")
+            context='delete'
+            echo ${red}Choosen \"Delete existing stage\" ${reset}
+            source ${scriptPath}/commands/${context}.sh
+            break
+            ;;
+        "Exit")
+            break
+            ;;
+        *) echo "invalid option ${REPLY}";;
+    esac
+done
