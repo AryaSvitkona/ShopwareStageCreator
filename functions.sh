@@ -23,7 +23,7 @@ function banner() {
 
 function logEntry() {
     date -u >> $logFile
-    echo $1 >> $logFile
+    echo $1 | tee -a $logFile
 }
 
 # runs all nessesary commands and quit if commands not available
