@@ -47,7 +47,6 @@ function initialTest() {
     testCommand dirname
     testCommand mkdir
     testCommand date
-    testCommand rory
 
 # checks if logfile contains errors and returns to console
     if [ -s ${logFile} ]; then
