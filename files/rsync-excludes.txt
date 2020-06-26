@@ -1,4 +1,3 @@
-.git/
 var/cache/
 mysqlTemp/
 log.txt
