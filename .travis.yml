@@ -1,0 +1,19 @@
+language: bash
+os: osx
+osx_image: xcode12	
+
+addons:
+  homebrew:
+    packages:
+      - mariadb
+      - httpd
+      - dnsmasq
+      - composer
+      - php@7.2
+      - php@7.3
+      - php@7.4
+    update: true
+
+script:
+  - ./.travis/clean.sh
+  - ./.travis/test.sh
