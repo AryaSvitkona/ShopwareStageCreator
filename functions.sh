@@ -98,7 +98,7 @@ function configCheck() {
             fi
             shopConfigFile="${shopDir}/config.php";
 
-        elif [ -f "${shopDir}/.env.php" ]; then
+        elif [ -f "${shopDir}/.env" ]; then
             shopConfigFile="${shopDir}/.env";
         else
             createLogEntry "No configuration file found"
