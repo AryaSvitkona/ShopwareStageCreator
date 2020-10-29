@@ -2,11 +2,10 @@
 
 function createStage()
 {
-    logEntry "Start with creating new stage by SSH user: $USER"
+    createLogEntry "Creating new stage with SSH user: $USER"
 
     shopwareCheck
 
     configCheck
-    echo ${shopConfigFile}
 
 }

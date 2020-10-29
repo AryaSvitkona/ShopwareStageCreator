@@ -21,7 +21,7 @@ function banner() {
     cat "${scriptPath}/files/banner.txt"
 }
 
-function logEntry() {
+function createLogEntry() {
     date -u >> $logFile
     echo $1 | tee -a $logFile
 }
@@ -51,18 +51,19 @@ function initialTest() {
         cat ${logFile}
         exit 1
     else
-        logEntry "Tests successfully passed - all commands available"
+        createLogEntry "Tests successfully passed - all commands available"
     fi
 }
 
 # function to test command and writes exception into logfile
 function testCommand() {
     if ! [ -x "$(command -v $1)" ]; then
-      logEntry "Error: $1 is not installed or inaccessible."
+      createLogEntry "Error: $1 is not installed or inaccessible."
     fi
 }
 
 # checks shopware installation and its major version (sw5 or sw6)
+# output string "SW5" or "SW6" or "unknow"
 function shopwareCheck() {
     if [ -f "${shopDir}/shopware.php" ]; then
 
@@ -70,7 +71,7 @@ function shopwareCheck() {
             swMajorVersion="SW5"
         else
             swMajorVersion="unknow"
-            logEntry "${swMajorVersion} instance found"
+            createLogEntry "${swMajorVersion} instance found"
             exit 1
         fi
 
@@ -79,21 +80,20 @@ function shopwareCheck() {
 
     else
         swMajorVersion="unknow"
-        logEntry "${swMajorVersion} instance found"
+        createLogEntry "${swMajorVersion} instance found"
         exit 1
     fi
 
-    logEntry "${swMajorVersion} instance found"
+    createLogEntry "${swMajorVersion} instance found"
 }
 
 # checks if shopware configuration exists
-
 function configCheck() {
     if [ "${swMajorVersion}" = "SW5" ];then
 
         if [ -f "${shopDir}/config.php" ]; then
             if [ -f "${shopDir}/.env" ]; then
-                logEntry "Config.php and .env file found"
+                createLogEntry "Config.php and .env file found"
                 exit 1
             fi
             shopConfigFile="${shopDir}/config.php";
@@ -101,18 +101,18 @@ function configCheck() {
         elif [ -f "${shopDir}/.env.php" ]; then
             shopConfigFile="${shopDir}/.env";
         else
-            logEntry "No configuration file found"
+            createLogEntry "No configuration file found"
             exit 1
         fi
-        logEntry "Configuration file located at ${shopConfigFile}"
+        createLogEntry "Configuration file located at ${shopConfigFile}"
     fi
 
     if [ "${swMajorVersion}" = "SW6" ];then
         if [ -f "${shopDir}/.env" ]; then
             shopConfigFile="${shopDir}/.env";
-            logEntry "Configuration file located at ${shopConfigFile}"
+            createLogEntry "Configuration file located at ${shopConfigFile}"
         else
-            logEntry "No configuration file found"
+            createLogEntry "No configuration file found"
             exit 1
         fi
 
